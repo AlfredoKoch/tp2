@@ -6,6 +6,7 @@
 package uv.datamining.tp2;
 
 import java.io.File;
+import java.io.IOException;
 import weka.classifiers.Evaluation;
 import weka.core.Instances;
 import weka.core.converters.ArffSaver;
@@ -24,7 +25,7 @@ public class WekaModeler {
     private MainFrame frame;
     private J48 modeloJ48;
     private NaiveBayes modeloBayes;
-    private RandomForest forest;
+    private RandomForest modeloForest;
     
     
     
@@ -114,7 +115,7 @@ public class WekaModeler {
         frame.appendMessage(eval.toMatrixString());
         frame.appendMessage("--- FIN MODELO NaiveBayes ---");
         String fileName = file.getAbsolutePath().substring(0,file.getAbsolutePath().lastIndexOf(".")) +".modelBayes";
-        weka.core.SerializationHelper.write(fileName,modeloJ48);
+        weka.core.SerializationHelper.write(fileName,modeloBayes);
         return fileName;
         
     }
@@ -132,18 +133,18 @@ public class WekaModeler {
         loader.setFile(file);
         Instances data = loader.getDataSet();
         data.setClassIndex(data.numAttributes() - 1); //columna con el atributo clase
-        forest = new RandomForest();
+        modeloForest = new RandomForest();
         
-        forest.buildClassifier(data);
+        modeloForest.buildClassifier(data);
         Evaluation eval = new Evaluation(data);
-        eval.evaluateModel(forest, data);
+        eval.evaluateModel(modeloForest, data);
         frame.appendMessage("--- MODELO RandomForest ---");
         frame.appendMessage(eval.toSummaryString());
         frame.appendMessage(eval.toMatrixString());
         frame.appendMessage("--- FIN MODELO RandomForest ---");
         
         String fileName = file.getAbsolutePath().substring(0,file.getAbsolutePath().lastIndexOf(".")) +".modelRForest";
-        weka.core.SerializationHelper.write(file.getAbsolutePath().substring(0,file.getAbsolutePath().lastIndexOf(".")) +".modelRForest",modeloJ48);
+        weka.core.SerializationHelper.write(fileName,modeloForest);
         return fileName;
         
     }
@@ -157,7 +158,39 @@ public class WekaModeler {
     }
     
     public void readModelForest(String absolutePath) throws Exception {
-        forest = (RandomForest) weka.core.SerializationHelper.read(absolutePath);
+        modeloForest = (RandomForest) weka.core.SerializationHelper.read(absolutePath);
+    }
+    
+    public void testUsingModels(File file) throws Exception{
+       ArffLoader loader = new ArffLoader();
+       loader.setFile(file);
+       Instances data = loader.getDataSet();
+       data.setClassIndex(data.numAttributes() - 1); 
+       Evaluation eval = new Evaluation(data);
+       eval.evaluateModel(modeloJ48, data);
+       frame.appendMessage("--- PRUEBAS MODELO J48 ---");
+       frame.appendMessage(eval.toSummaryString());
+       frame.appendMessage(eval.toMatrixString());
+       frame.appendMessage("--- FIN PRUEBAS MODELO J48 ---");
+       Evaluation eval2 = new Evaluation(data);
+       eval2.evaluateModel(modeloBayes, data);
+       frame.appendMessage("--- PRUEBAS MODELO Bayes ---");
+       frame.appendMessage(eval.toSummaryString());
+       frame.appendMessage(eval.toMatrixString());
+       frame.appendMessage("--- FIN PRUEBAS MODELO Bayes ---");
+       Evaluation eval3 = new Evaluation(data);
+       eval3.evaluateModel(modeloForest, data);
+       frame.appendMessage("--- PRUEBAS MODELO RandomForest ---");
+       frame.appendMessage(eval.toSummaryString());
+       frame.appendMessage(eval.toMatrixString());
+       frame.appendMessage("--- FIN PRUEBAS MODELO RandomForest ---");
+    }
+    
+    public void clasify(File file) throws IOException{
+        ArffLoader loader = new ArffLoader();
+        loader.setFile(file);
+        Instances data = loader.getDataSet();
+        data.setClassIndex(data.numAttributes() - 1); //columna con el atributo clase
     }
     
 }
