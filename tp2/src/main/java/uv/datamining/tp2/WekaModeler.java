@@ -175,14 +175,14 @@ public class WekaModeler {
        Evaluation eval2 = new Evaluation(data);
        eval2.evaluateModel(modeloBayes, data);
        frame.appendMessage("--- PRUEBAS MODELO Bayes ---");
-       frame.appendMessage(eval.toSummaryString());
-       frame.appendMessage(eval.toMatrixString());
+       frame.appendMessage(eval2.toSummaryString());
+       frame.appendMessage(eval2.toMatrixString());
        frame.appendMessage("--- FIN PRUEBAS MODELO Bayes ---");
        Evaluation eval3 = new Evaluation(data);
        eval3.evaluateModel(modeloForest, data);
        frame.appendMessage("--- PRUEBAS MODELO RandomForest ---");
-       frame.appendMessage(eval.toSummaryString());
-       frame.appendMessage(eval.toMatrixString());
+       frame.appendMessage(eval3.toSummaryString());
+       frame.appendMessage(eval3.toMatrixString());
        frame.appendMessage("--- FIN PRUEBAS MODELO RandomForest ---");
     }
     
