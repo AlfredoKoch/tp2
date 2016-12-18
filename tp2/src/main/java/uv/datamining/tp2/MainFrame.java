@@ -26,6 +26,7 @@ import org.apache.poi.xssf.usermodel.XSSFWorkbook;
 public class MainFrame extends javax.swing.JFrame {
 
     private File file;
+    private File lastOpenedFile;
     private WekaModeler wekaModeler;
     
     private TextAreaOutputStream consola;
@@ -168,14 +169,19 @@ public class MainFrame extends javax.swing.JFrame {
 
         jTextField5.setEditable(false);
 
-        jButton10.setText("Probar Modelos");
+        jButton10.setText("Probar Modelos (archivos CON clase)");
         jButton10.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jButton10ActionPerformed(evt);
             }
         });
 
-        jButton11.setText("Clasificar con Modelos");
+        jButton11.setText("Clasificar con Modelos (archivos SIN clase)");
+        jButton11.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton11ActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -184,7 +190,7 @@ public class MainFrame extends javax.swing.JFrame {
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 536, Short.MAX_VALUE)
+                    .addComponent(jScrollPane1)
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                         .addGap(0, 0, Short.MAX_VALUE)
                         .addComponent(jButton6))
@@ -198,9 +204,9 @@ public class MainFrame extends javax.swing.JFrame {
                             .addComponent(jButton1, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                             .addComponent(jButton3, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                             .addComponent(jButton4, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                        .addGap(34, 34, 34)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(layout.createSequentialGroup()
+                                .addGap(34, 34, 34)
                                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                     .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                                         .addComponent(jLabel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
@@ -208,18 +214,21 @@ public class MainFrame extends javax.swing.JFrame {
                                         .addComponent(jLabel3, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                                         .addComponent(jLabel4, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                                     .addComponent(jLabel5))
+                                .addGap(31, 31, 31)
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(jTextField1)
+                                    .addComponent(jTextField4)
+                                    .addComponent(jTextField3)
+                                    .addGroup(layout.createSequentialGroup()
+                                        .addComponent(jTextField2, javax.swing.GroupLayout.PREFERRED_SIZE, 237, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                        .addGap(0, 0, Short.MAX_VALUE))
+                                    .addComponent(jTextField5)))
+                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                                    .addComponent(jTextField3)
-                                    .addComponent(jTextField1)
-                                    .addComponent(jTextField2, javax.swing.GroupLayout.DEFAULT_SIZE, 230, Short.MAX_VALUE)
-                                    .addComponent(jTextField4)
-                                    .addComponent(jTextField5)))
-                            .addGroup(layout.createSequentialGroup()
-                                .addComponent(jButton10)
-                                .addGap(18, 18, 18)
-                                .addComponent(jButton11)
-                                .addGap(0, 0, Short.MAX_VALUE)))))
+                                    .addComponent(jButton10, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                    .addComponent(jButton11, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
+                        .addGap(17, 17, 17)))
                 .addContainerGap())
         );
         layout.setVerticalGroup(
@@ -235,32 +244,40 @@ public class MainFrame extends javax.swing.JFrame {
                     .addComponent(jButton5)
                     .addComponent(jLabel2)
                     .addComponent(jTextField2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jButton2)
-                    .addComponent(jLabel3)
-                    .addComponent(jTextField3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jButton3)
-                    .addComponent(jLabel4)
-                    .addComponent(jTextField4, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jButton4)
-                    .addComponent(jLabel5)
-                    .addComponent(jTextField5, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jButton7)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jButton8)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 19, Short.MAX_VALUE)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jButton9)
-                    .addComponent(jButton10)
-                    .addComponent(jButton11))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 374, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(layout.createSequentialGroup()
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(jLabel3)
+                            .addComponent(jTextField3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(jLabel4)
+                            .addComponent(jTextField4, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(jLabel5)
+                            .addComponent(jTextField5, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(18, 18, 18)
+                        .addComponent(jButton2)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(jButton4)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(jButton8)
+                        .addGap(23, 23, 23)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(jButton3)
+                            .addComponent(jButton10))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(jButton7)
+                            .addComponent(jButton11))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(jButton9)
+                        .addGap(17, 17, 17)))
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 351, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jButton6)
                 .addGap(6, 6, 6))
@@ -271,14 +288,20 @@ public class MainFrame extends javax.swing.JFrame {
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
         try {
-            JFileChooser chooser = new JFileChooser();
+            JFileChooser chooser;
+            if(lastOpenedFile==null){
+                chooser = new JFileChooser();
+            }else{
+                chooser = new JFileChooser(lastOpenedFile);
+            }
+             
             chooser.showOpenDialog(this);
             file = chooser.getSelectedFile();
             if (file == null) {
                 JOptionPane.showMessageDialog(this, "Error al cargar el archivo");
             }
             jTextField1.setText(file.getName());
-
+            lastOpenedFile=file.getParentFile();
 //            XSSFWorkbook wb = new XSSFWorkbook(file);
 //            XSSFSheet hoja1 = wb.cloneSheet(0);
 //            int i = 0;
@@ -320,7 +343,7 @@ public class MainFrame extends javax.swing.JFrame {
         try {
             Float cm = Float.valueOf(jTextField2.getText());
             jTextField3.setText(wekaModeler.generarArbolJ48(file, cm));
-            JOptionPane.showMessageDialog(null, "Árbol Generado");
+            JOptionPane.showMessageDialog(this, "Árbol Generado");
         }catch(NumberFormatException e){
             JOptionPane.showMessageDialog(this, "El valor del CM no es un número válido");
         } catch (Exception ex) {
@@ -336,13 +359,19 @@ public class MainFrame extends javax.swing.JFrame {
 
     private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
         try {
-            JFileChooser chooser = new JFileChooser();
+             JFileChooser chooser;
+            if(lastOpenedFile==null){
+                chooser = new JFileChooser();
+            }else{
+                chooser = new JFileChooser(lastOpenedFile);
+            }
             chooser.showOpenDialog(this);
             File file = chooser.getSelectedFile();
             if (file == null) {
                 JOptionPane.showMessageDialog(this, "Error al cargar el archivo");
                 return;
             }
+            lastOpenedFile=file.getParentFile();
             if(!file.getName().contains("modelJ48")){
                 JOptionPane.showMessageDialog(this, "Por favor seleccione un archivo válido (.modelJ48)");
                 return;
@@ -374,13 +403,19 @@ public class MainFrame extends javax.swing.JFrame {
 
     private void jButton7ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton7ActionPerformed
         try {
-            JFileChooser chooser = new JFileChooser();
+             JFileChooser chooser;
+            if(lastOpenedFile==null){
+                chooser = new JFileChooser();
+            }else{
+                chooser = new JFileChooser(lastOpenedFile);
+            }
             chooser.showOpenDialog(this);
             File file = chooser.getSelectedFile();
             if (file == null) {
                 JOptionPane.showMessageDialog(this, "Error al cargar el archivo");
                 return;
             }
+            lastOpenedFile=file.getParentFile();
             if(!file.getName().contains(".modelBayes")){
                 JOptionPane.showMessageDialog(this, "Por favor seleccione un archivo válido (.modelBayes)");
                 return;
@@ -401,7 +436,7 @@ public class MainFrame extends javax.swing.JFrame {
                 return;
             }
             jTextField5.setText(wekaModeler.generarRamdomForest(file));
-            JOptionPane.showMessageDialog(null, "Random Forest Generado");
+            JOptionPane.showMessageDialog(this, "Random Forest Generado");
         } catch (Exception ex) {
             JOptionPane.showMessageDialog(this, "Error al generar el arbol : "+ex.getMessage());
             this.appendMessage(ex.getMessage());
@@ -411,13 +446,19 @@ public class MainFrame extends javax.swing.JFrame {
 
     private void jButton9ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton9ActionPerformed
         try {
-            JFileChooser chooser = new JFileChooser();
+             JFileChooser chooser;
+            if(lastOpenedFile==null){
+                chooser = new JFileChooser();
+            }else{
+                chooser = new JFileChooser(lastOpenedFile);
+            }
             chooser.showOpenDialog(this);
             File file = chooser.getSelectedFile();
             if (file == null) {
                 JOptionPane.showMessageDialog(this, "Error al cargar el archivo");
                 return;
             }
+            lastOpenedFile=file.getParentFile();
             if(!file.getName().contains(".modelRForest")){
                 JOptionPane.showMessageDialog(this, "Por favor seleccione un archivo válido (.modelRForest)");
                 return;
@@ -444,6 +485,21 @@ public class MainFrame extends javax.swing.JFrame {
             Logger.getLogger(MainFrame.class.getName()).log(Level.SEVERE, null, ex);
         }
     }//GEN-LAST:event_jButton10ActionPerformed
+
+    private void jButton11ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton11ActionPerformed
+        if(file==null || file.getName().isEmpty() || !file.getName().contains(".arff")){
+            JOptionPane.showMessageDialog(this, "Por favor cargue un archivo .arff");
+            return;
+        }
+        try {
+            wekaModeler.clasifyUnclasiffiedInstances(file);
+            JOptionPane.showMessageDialog(this, "Instancias clasificadas, por favor revisar el archivo respectivo");
+        } catch (Exception ex) {
+            JOptionPane.showMessageDialog(this, "Error :"+ex.getMessage());
+            this.appendMessage(ex.getMessage());
+            Logger.getLogger(MainFrame.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }//GEN-LAST:event_jButton11ActionPerformed
 
     /**
      * @param args the command line arguments
