@@ -6,22 +6,17 @@
 package uv.datamining.tp2;
 
 import java.io.File;
-import java.io.FileOutputStream;
-import java.io.IOException;
-import java.util.Iterator;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.JFileChooser;
 import javax.swing.JOptionPane;
-import org.apache.poi.openxml4j.exceptions.InvalidFormatException;
-import org.apache.poi.ss.usermodel.Cell;
-import org.apache.poi.xssf.usermodel.XSSFRow;
-import org.apache.poi.xssf.usermodel.XSSFSheet;
-import org.apache.poi.xssf.usermodel.XSSFWorkbook;
 
 /**
- *
- * @author R4
+ * Este es un proyecto académico para la implementación básica de modelos de machine learning
+ * bugs, sugerencias, reclamos, madrazos o propinas me pueden escribir a titobogard@gmail.com
+ * Se puede usar, copiar, modificar y distribuir sin permiso expreso del autor. 
+ * Ver el tutorial de uso adjunto (PDF)
+ * @author Alfredo Koch (17-12-2016)
  */
 public class MainFrame extends javax.swing.JFrame {
 
@@ -80,6 +75,7 @@ public class MainFrame extends javax.swing.JFrame {
         jButton11 = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setTitle("TP2 (Weka Machine Learning)");
 
         jTextArea1.setEditable(false);
         jTextArea1.setColumns(20);
@@ -302,24 +298,6 @@ public class MainFrame extends javax.swing.JFrame {
             }
             jTextField1.setText(file.getName());
             lastOpenedFile=file.getParentFile();
-//            XSSFWorkbook wb = new XSSFWorkbook(file);
-//            XSSFSheet hoja1 = wb.cloneSheet(0);
-//            int i = 0;
-//            while (true) {
-//                XSSFRow row = hoja1.getRow(i++);
-//                if (row == null) {
-//                    break;
-//                }
-//                int j=0;
-//                while(true){
-//                    Cell c = row.getCell(j);
-//                    if(c==null)
-//                        break;
-//                    
-//                }
-//                
-//
-//            }
 
         } catch (Exception ex) {
             ex.printStackTrace();
@@ -495,6 +473,7 @@ public class MainFrame extends javax.swing.JFrame {
             wekaModeler.clasifyUnclasiffiedInstances(file);
             JOptionPane.showMessageDialog(this, "Instancias clasificadas, por favor revisar el archivo respectivo");
         } catch (Exception ex) {
+            ex.printStackTrace();
             JOptionPane.showMessageDialog(this, "Error :"+ex.getMessage());
             this.appendMessage(ex.getMessage());
             Logger.getLogger(MainFrame.class.getName()).log(Level.SEVERE, null, ex);

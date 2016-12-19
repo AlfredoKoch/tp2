@@ -279,7 +279,7 @@ public class CSVManipulator {
                     lineCont[8] = "penthouse";
                 }
                 if(!tipo){
-                    continue;
+                    lineCont[8] = lineCont[1];
                 }
                 for(int j=0; j<lineCont.length; j++){
                     fos.write(lineCont[j].getBytes());
